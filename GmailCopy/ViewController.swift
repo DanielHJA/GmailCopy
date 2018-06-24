@@ -115,7 +115,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Brevlådor", style: .plain, target: nil, action: nil)
         navigationController?.pushViewController(controller, animated: true)
     }
-    
+
 }
 
 extension ViewController: UIScrollViewDelegate {

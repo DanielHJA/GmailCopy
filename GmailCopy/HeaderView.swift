@@ -55,6 +55,7 @@ class HeaderView: UIView {
     convenience init(title: String, height: CGFloat, showsSearchbar: Bool) {
         self.init(frame: CGRect(x: 0, y: 0, width: 0, height: height))
         backgroundColor = UIColor.white
+        clipsToBounds = true
         separator.isHidden = false
         label.text = title
         
