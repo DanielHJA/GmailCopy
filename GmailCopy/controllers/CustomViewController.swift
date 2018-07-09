@@ -8,13 +8,17 @@
 
 import UIKit
 
-class CustomViewController: UIViewController, NewEmailDelegate {
+class CustomViewController: UIViewController {
 
     lazy var changeBarbuttonItem: UIBarButtonItem = {
         return UIBarButtonItem(title: "Ändra", style: .plain, target: self, action: nil)
     }()
     
-    lazy var bottomView: StartpageBottomFooterView = {
+    var transitionManager: TransitionManager = {
+        return TransitionManager(percentage: 0.9, duration: 2.0, tapToDismiss: true, direction: .bottom, backgroundStyle: .blurred, shouldMinimizeBackground: true)
+    }()
+    
+    lazy var bottomView: StartpageBottomFooterView = { [unowned self] in
         let temp = StartpageBottomFooterView(frame: CGRect.zero)
         temp.delegate = self
         temp.isHidden = true
@@ -34,10 +38,16 @@ class CustomViewController: UIViewController, NewEmailDelegate {
         view.backgroundColor = UIColor.white
     }
 
-    func openNewEmailController() { print("1") }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
 
+extension CustomViewController: NewEmailDelegate {
+    func openNewEmailController() {
+        let vc = NewEmailViewController()
+        vc.transitioningDelegate = transitionManager
+        vc.modalPresentationStyle = .custom
+        present(vc, animated: true, completion: nil)
+    }
+}

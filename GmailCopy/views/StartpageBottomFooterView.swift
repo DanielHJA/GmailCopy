@@ -64,7 +64,7 @@ class StartpageBottomFooterView: UIView {
         temp.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         return temp
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

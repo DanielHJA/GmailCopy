@@ -11,7 +11,12 @@ import UIKit
 class InboxesViewController: CustomViewController {
 
     var inboxType: InboxTypes?
-    var cells: [UITableViewCell] = [EmailTableViewCell(),EmailTableViewCell(),EmailTableViewCell(),EmailTableViewCell()]
+    var cells: [EmailModel] = [
+        EmailModel(title: "World's Ending!", subject: "Hours left to live", content: "This weekend, the world is ending! Don't miss it, it's the last thing you'll ever see!", time: "09:10", isRead: false),
+        EmailModel(title: "Dog cures cancer!", subject: "A dog has cured cancer!", content: "Earlier this week, scientists found a dog that was able to cure cancer by licking the face of the person.", time: "09:21", isRead: true),
+        EmailModel(title: "Fast food now healthy!", subject: "All you can eat...", content: "All fast food in the world is now healthy to eat according to recent discoveries in the field.", time: "10:20", isRead: false),
+        EmailModel(title: "Baby's really do come from storks", subject: "In disregard of current beliefs, baby's do not actually come from humans after all! This discovery has changed the world.", content: "", time: "21:45", isRead: true)
+    ]
     
     private lazy var tableView: UITableView = {
         let temp = UITableView(frame: CGRect.zero, style: .grouped)
@@ -51,10 +56,6 @@ class InboxesViewController: CustomViewController {
         refreshControl.endRefreshing()
     }
     
-    override func openNewEmailController() {
-        
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -72,12 +73,12 @@ extension InboxesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EmailTableViewCell.identifer, for: indexPath) as? EmailTableViewCell else { return UITableViewCell() }
-        
+        cell.setupWith(cells[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 100.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

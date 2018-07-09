@@ -29,7 +29,7 @@ class ViewController: CustomViewController {
     
     lazy var refreshControl: UIRefreshControl = {
         let temp = UIRefreshControl()
-        temp.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        temp.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
         temp.tintColor = UIColor.black
         temp.backgroundColor = UIColor.white
         return temp
@@ -68,9 +68,6 @@ class ViewController: CustomViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    override func openNewEmailController() { }
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
